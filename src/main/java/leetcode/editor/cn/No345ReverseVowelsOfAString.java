@@ -36,42 +36,43 @@ import java.util.Locale;
 public class No345ReverseVowelsOfAString {
     public static void main(String[] args) {
         Solution solution = new No345ReverseVowelsOfAString().new Solution();
+        String s = solution.reverseVowels("abov");
+        System.out.println(s);
     }
 
     //leetcode submit region begin(Prohibit modification and deletion)
     class Solution {
         public String reverseVowels(String s) {
+            char[] result = s.toCharArray();
             int i = 0, j = s.length() - 1;
-            char[] res = new char[s.length()];
             while (i < j) {
                 while (i < s.length()) {
-                    if (isVowel(s.charAt(i))) {
+                    if (isVowel(result[i])) {
                         break;
                     }
-                    res[i] = s.charAt(i);
-                    i++;
+                    i ++;
                 }
                 while (j >= 0) {
-                    if (isVowel(s.charAt(j))) {
+                    if (isVowel(result[j])) {
                         break;
                     }
-                    res[j] = s.charAt(j);
-                    j--;
+                    j --;
                 }
                 if (i < j) {
-                    res[i++] = s.charAt(j);
-                    res[j--] = s.charAt(i);
-                } else {
-                    break;
+                    char tmp = result[i];
+                    result[i] = result[j];
+                    result[j] = tmp;
+                    i ++;
+                    j --;
                 }
             }
-            return new String(res);
+            return new String(result);
         }
 
         private boolean isVowel(char c) {
-            return Arrays.asList("a", "e", "i", "o", "u").contains(String.valueOf(c).toLowerCase(Locale.ROOT));
+            return Arrays.asList("a", "e", "i", "o", "u").contains(String.valueOf(c).toLowerCase());
         }
     }
-//leetcode submit region end(Prohibit modification and deletion)
+    //leetcode submit region end(Prohibit modification and deletion)
 
 }

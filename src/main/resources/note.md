@@ -8,13 +8,9 @@ nums.length == 2, max(nums[0], nums[1])
 nums.length > 2, result[i] = max(result[i - 1], result[i - 2] + nums[i])
 ```
 
-
-
 #### 203. 删除指定链表元素
 
 可以创建一个 `dummyNode `作为头节点用 `dummyNode.next` 来返回结果
-
-
 
 #### 206. 反转链表
 
@@ -38,8 +34,6 @@ nums.length > 2, result[i] = max(result[i - 1], result[i - 2] + nums[i])
   return result;
   ```
 
-
-
 #### 665. 能否改变一个元素使数组非递减
 
 需要考虑两种情况
@@ -58,8 +52,6 @@ nums.length > 2, result[i] = max(result[i - 1], result[i - 2] + nums[i])
 	}
 ```
 
-
-
 #### 144. 先序遍历二叉树 （递归 -> 栈）
 
 <img src="./img/二叉树.png" alt="二叉树" style="zoom:50%;" />
@@ -75,38 +67,36 @@ nums.length > 2, result[i] = max(result[i - 1], result[i - 2] + nums[i])
 
 - **先序 **(中左右)
 
-  - 递归
+    - 递归
 
-    ```java
-    public List<Integer> preorderTraversal(TreeNode root, List<Integer> result) {
-        if (root == null) {
-            return result;
-        }
-        result.add(root.val);
-        // 这里不用判断 root.left == null，因为进入方法后会先进行判断的
-        preorderTraversal(root.left, result);
-        preorderTraversal(root.right, result);
-        return result;
-    }
-    ```
+      ```java
+      public List<Integer> preorderTraversal(TreeNode root, List<Integer> result) {
+          if (root == null) {
+              return result;
+          }
+          result.add(root.val);
+          // 这里不用判断 root.left == null，因为进入方法后会先进行判断的
+          preorderTraversal(root.left, result);
+          preorderTraversal(root.right, result);
+          return result;
+      }
+      ```
 
-  - 迭代：栈，依次入栈 (中，右，左；因为左节点需要先遍历所以后放进去)
+    - 迭代：栈，依次入栈 (中，右，左；因为左节点需要先遍历所以后放进去)
 
-    ```java
-    while (!stack.empty()) {
-        TreeNode pop = stack.pop();
-        result.add(pop.val);
-        // 左节点要先出栈，所以后放入
-        if (pop.right != null) {
-            stack.push(pop.right);
-        }
-        if (pop.left != null) {
-            stack.push(pop.left);
-        }
-    }
-    ```
-
-    
+      ```java
+      while (!stack.empty()) {
+          TreeNode pop = stack.pop();
+          result.add(pop.val);
+          // 左节点要先出栈，所以后放入
+          if (pop.right != null) {
+              stack.push(pop.right);
+          }
+          if (pop.left != null) {
+              stack.push(pop.left);
+          }
+      }
+      ```
 
 #### 94. 中序遍历二叉树
 
@@ -123,8 +113,6 @@ while (root != null || !stack.empty()) {
     root = pop.right;
 }
 ```
-
-
 
 #### 145. 后序遍历二叉树
 
@@ -149,8 +137,6 @@ while (root != null || !stack.empty()) {
 }
 ```
 
-
-
 #### 70. 爬楼梯
 
 每次可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到 n 楼楼顶
@@ -158,4 +144,34 @@ while (root != null || !stack.empty()) {
 ```
 ans[i] = ans[i - 1] + ans[i - 2];
 ```
+
+
+
+#### 345. 交换元音字母
+
+由于字符串不可变，不能直接交换，所以使用 `s.toCharArray` 转换成数组
+
+使用两个指针，找到元音字母后进行交换
+
+
+
+#### 1115. 多线程交替打印指定次数的字符串
+
+- 两个信号量：一个打印完成后释放另一个线程的信号量
+- ReentrantLock + Condition + 标志：需要先获取锁，一个线程标志为真时输出，否则等待，输出完成后修改标志；另一个线程相反
+- CycleBarrier + 标志：可重用的，两个线程通过标志按顺序输出，两个线程都输出后栅栏恢复开始新一次输出
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
