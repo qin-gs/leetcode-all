@@ -199,6 +199,71 @@ ans[i] = ans[i - 1] + ans[i - 2];
 
 
 
+#### 461. 汉明距离
+
+异或：x ^ y
+
+获取一个数据中 1 的数量
+
+```java
+int ans = 0;
+while (i > 0) {
+    // 通过 & 1 判断数字的最后一位
+    ans += (i & 1);
+    i = i >> 1;
+}
+
+// 或者
+Integer.bitCount(i);
+```
+
+
+
+#### 739. 每日温度
+
+找到下一个大于该值的数字与当前的距离
+
+单调栈 (存储下标，不能存储值)
+
+
+
+#### 95. 生成二叉树
+
+每个数字依次作为根节点
+
+```java
+// 依次作为根节点
+for (int i = start; i <= end; i++) {
+    // 获取所有的左子树
+    List<TreeNode> leftTrees = generateTrees(start, i - 1);
+    // 获取所有的右子树
+    List<TreeNode> rightTrees = generateTrees(i + 1, end);
+    for (TreeNode left : leftTrees) {
+        for (TreeNode right : rightTrees) {
+            // 创建根节点，左右节点依次赋值
+            TreeNode root = new TreeNode(i);
+            root.left = left;
+            root.right = right;
+            ans.add(root);
+        }
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
