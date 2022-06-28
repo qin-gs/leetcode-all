@@ -252,17 +252,40 @@ for (int i = start; i <= end; i++) {
 
 
 
+#### 704. 二分查找
+
+数组有序，无重复
 
 
 
+#### 34. 有序数组中查找元素出现开始和结尾位置
+
+```java
+while (low <= high) {
+    int mid = low + (high - low) / 2;
+    if (nums[mid] > target) {
+        high = mid - 1;
+    } else if (nums[mid] < target) {
+        low = mid + 1;
+    } else {
+        ans = mid;
+        // 如果寻找左边界，可能左边还有相同的值
+        if (isLeft) {
+            high = mid - 1;
+        } else {
+            low = mid + 1;
+        }
+    }
+}
+```
 
 
 
+#### 11. 盛最多水的容器
 
+使用双指针，每次移动较小的一边
 
-
-
-
+<img src="./img/盛最多水的容器.jpg" alt="盛最多水的容器" style="zoom:50%;" />
 
 
 
