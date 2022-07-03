@@ -389,6 +389,14 @@ public boolean isPrime(int n) {
 
 
 
+#### 53. 最大子数组和
+
+如果前边累加后还不如自己本身大，那就把前边的都扔掉，从自己本身重新开始累加。
+
+$ans[i] = max(ans[i - 1] + nums[i], nums[i])$
+
+
+
 
 
 
