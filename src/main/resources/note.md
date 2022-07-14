@@ -595,6 +595,60 @@ return Math.max(count, max);
 
 
 
+#### ⭐279. 将整数拆分成平方数的和
+
+动态规划
+
+```java
+int[] ans = new int[n + 1];
+ans[0] = 0;
+ans[1] = 1;
+for (int i = 2; i <= n; i++) {
+    // 最多需要 n 个 1
+    ans[i] = i;
+    for (int j = 1; j * j <= i; j++) {
+        ans[i] = Math.min(ans[i], ans[i - j * j] + 1);
+    }
+}
+return ans[n];
+```
+
+
+
+#### 202. 二叉树的层次遍历
+
+队列
+
+
+
+#### ⭐744. 在排序数组中查找大于指定值的最小值
+
+二分法，找到小于指定值的最大值
+
+```java
+int left = 0, right = letters.length - 1;
+int mid = 0;
+while (left <= right) {
+    mid = left + (right - left) / 2;
+    if (letters[mid] <= target) {
+        left = mid + 1;
+    } else {
+        right = mid - 1;
+    }
+}
+return letters[left];
+```
+
+
+
+#### 300. 最长递增子序列 (子序列可以不连续)
+
+动态规划
+
+
+
+
+
 
 
 
