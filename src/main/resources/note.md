@@ -647,9 +647,25 @@ return letters[left];
 
 
 
+#### 130.
+
+#### 63.
+
+#### 180. 连续出现三次的记录
+
+```sql
+select * from logs l1, logs l2, logs l3
+where l1.id = l2.id - 1 and l2.id = l3.id - 1
+and l1.num == l2.num and l2.num == l3.num
+
+select * from logs
+where (id + 1, num) in (select * from logs)
+and (id + 1, num) int (select * from logs)
+```
 
 
 
+#### 557. 反转字符串中的单词
 
-
+#### 83. 移除链表中的重复节点
 
