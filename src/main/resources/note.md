@@ -669,3 +669,210 @@ and (id + 1, num) int (select * from logs)
 
 #### 83. 移除链表中的重复节点
 
+#### ⭐ 671. 第二小节点
+
+<img src="./img/671.jpg" alt="img" style="zoom:50%;" />
+
+```java
+// 最小的是根节点，要找的是比根节点大的
+private int getMin(TreeNode root, int val) {
+    if (root == null) {
+        return -1;
+    }
+    // 如果当前节点的值大于 val，这个节点就不用继续遍历了
+    if (root.val > val) {
+        return root.val;
+    }
+    int left = getMin(root.left, val);
+    int right = getMin(root.right, val);
+    // 如果两个子树，都有小于 val 的节点，选小的那个
+    if (left != -1 && right != -1) {
+        return Math.min(left, right);
+    } else {
+        // 如果只有一个子树有小于 val 的节点
+        return Math.max(left, right);
+    }
+}
+```
+
+
+
+#### 66. 对数组中的数组加一
+
+从尾部遍历，如果是 9，改成0，再判断前一位；如果不是 9，直接加 1 就行
+
+```java
+public int[] plusOne(int[] digits) {
+    for (int i = digits.length - 1; i >= 0; i--) {
+        digits[i] = (digits[i] + 1) % 10;
+        if (digits[1] != 0) {
+            return digits;
+        }
+    }
+    // 如果没有返回说明全是 9
+    digits = new int[digits.length + 1];
+    digits[0] = 1;
+    return digits;
+}
+```
+
+
+
+#### 814. 二叉树剪枝
+
+递归：去除子节点全为 0 的子树
+
+```java
+public TreeNode pruneTree(TreeNode root) {
+    if (root == null) {
+        return null;
+    }
+    root.left = pruneTree(root.left);
+    root.right = pruneTree(root.right);
+    if (root.left == null && root.right == null && root.val == 0) {
+        return null;
+    }
+    return root;
+}
+```
+
+
+
+#### ⭐ 191. 求数字的二进制表示中 1 的个数
+
+- 算术右移 >> ：舍弃最低位，高位用符号位填补；
+
+- 逻辑右移 >>> ：舍弃最低位，高位用 0 填补。
+
+  那么对于负数来说，其二进制最高位是 1，如果使用算术右移，那么高位填补的仍然是 1
+
+```java
+public int hammingWeight(int n) {
+    int ans = 0;
+    while (n != 0) {
+        int i = n % 2;
+        if (i != 0) {
+            ans += 1;
+        }
+        // 逻辑右移
+        n >>>= 1;
+    }
+    return ans;
+}
+```
+
+`n & (n - 1)`相当于将 n 的二进制的最后一个 1 变成 0
+
+6 & 5 = 5
+
+110 & 100 = 100
+
+```java
+public int hammingWeight(int n) {
+    int ret = 0;
+    while (n != 0) {
+        // 不断让 n 的最后一个 1 变成 0
+        n &= n - 1;
+        // 改了几次，就有几个 1
+        ret++;
+    }
+    return ret;
+}
+```
+
+
+
+#### 283. 将数组中的 0 向后移
+
+双指针，left 指向 0 的位置，right 指向不为 0 的位置
+
+```java
+public void moveZeroes(int[] nums) {
+    int left = 0, right = 0;
+    // left 到 right 之间全是 0
+    while (right < nums.length) {
+        if (nums[right] != 0) {
+            swap(nums, left, right);
+            left++;
+        }
+        right++;
+    }
+}
+```
+
+
+
+#### 415. 字符串相加
+
+`char -> int    s.charAt(i) - '0'`
+
+
+
+#### ⭐ 441. 求满足 $ (1 + n) * n / 2 < val$  最大的 n
+
+二分法，边界
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
