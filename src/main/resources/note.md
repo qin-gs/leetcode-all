@@ -814,6 +814,15 @@ public void moveZeroes(int[] nums) {
 
 
 
+#### 693. 判断数字是否01相间
+
+```java
+// 5  101 ^ 010 = 111 得到全为 1 的数
+int tmp = n ^ (n >> 1);
+// 0111 & 1000 = 0
+return (tmp & (tmp + 1)) == 0;
+```
+
 
 
 
