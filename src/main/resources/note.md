@@ -825,15 +825,52 @@ return (tmp & (tmp + 1)) == 0;
 
 
 
+#### l22. 倒数第 n 个节点
+
+用两个指针，第一个提前向下走 n 个节点，当第一个到末尾的时候，第二个指针正好指向倒数第 n 个节点
 
 
 
+#### ⭐ l26. 判断一个树是不是另一个的子树  (包含)
+
+递归
+
+- b 是 a 的根节点的子树
+- b 是 a 的左子节点的子树
+- b 是 a 的右子节点的子树
+
+判断是不是子树
+
+- 根节点相等
+- 两个子节点完全相同
+
+```java
+public boolean isSubStructure(TreeNode A, TreeNode B) {
+    return isSame(A, B)
+            || isSubStructure(A.left, B.left)
+            || isSubStructure(A.right, B.right);
+}
+/**
+ * 判断 b 是不是 a 的子树
+ */
+public boolean isSame(TreeNode a, TreeNode b) {
+    if (b == null) {
+        return true;
+    }
+    if (a == null) {
+        return false;
+    }
+    if (a.val == b.val) {
+        return isSame(a.left, b.left)
+                && isSame(a.right, b.right);
+    }
+    return false;
+}
+```
 
 
 
-
-
-
+#### ⭐ l29. 顺时针打印矩阵
 
 
 
