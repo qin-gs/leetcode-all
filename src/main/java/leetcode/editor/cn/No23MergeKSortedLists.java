@@ -48,7 +48,9 @@
 package leetcode.editor.cn;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Objects;
+import java.util.PriorityQueue;
 
 public class No23MergeKSortedLists {
     public static void main(String[] args) {
@@ -98,6 +100,80 @@ public class No23MergeKSortedLists {
         public boolean isFinished(ListNode[] lists) {
             return Arrays.stream(lists).noneMatch(Objects::nonNull);
         }
+
+        /**
+         * 优先队列
+         */
+        public ListNode mergeKLists2(ListNode[] lists) {
+            PriorityQueue<ListNode> queue = new PriorityQueue<>(Comparator.comparingInt(o -> o.val));
+            for (ListNode node : lists) {
+                if (node != null) {
+                    queue.add(node);
+                }
+            }
+
+            ListNode dummyNode = new ListNode();
+            ListNode root = dummyNode;
+            while (!queue.isEmpty()) {
+                ListNode poll = queue.poll();
+                root.next = poll;
+                root = root.next;
+                if (poll.next != null) {
+                    queue.add(poll.next);
+                }
+            }
+            return dummyNode.next;
+        }
+
+        /**
+         * 分治
+         */
+        public ListNode mergeKLists3(ListNode[] lists) {
+            return merge(lists, 0, lists.length - 1);
+        }
+
+        private ListNode merge(ListNode[] lists, int left, int right) {
+            if (left == right) {
+                return lists[left];
+            }
+            if (left > right) {
+                return null;
+            }
+            int mid = left + (right - left) / 2;
+            return mergeTwoList(merge(lists, left, mid), merge(lists, mid + 1, right));
+        }
+
+        /**
+         * 合并两个
+         */
+        private ListNode mergeTwoList(ListNode left, ListNode right) {
+            if (left == null) {
+                return right;
+            }
+            if (right == null) {
+                return left;
+            }
+            ListNode dummyNode = new ListNode();
+            ListNode tail = dummyNode;
+            while (left != null && right != null) {
+                if (left.val < right.val) {
+                    tail.next = left;
+                    left = left.next;
+                } else {
+                    tail.next = right;
+                    right = right.next;
+                }
+                tail = tail.next;
+            }
+            if (left != null) {
+                tail.next = left;
+            }
+            if (right != null) {
+                tail.next = right;
+            }
+            return dummyNode.next;
+        }
+
     }
     // leetcode submit region end(Prohibit modification and deletion)
 
