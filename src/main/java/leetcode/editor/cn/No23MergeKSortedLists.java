@@ -59,7 +59,7 @@ public class No23MergeKSortedLists {
         ListNode second = new ListNode(1, new ListNode(3, new ListNode(4)));
         ListNode third = new ListNode(2, new ListNode(6));
         ListNode ans = solution.mergeKLists(new ListNode[]{first, second, third});
-        ListNode.printListNode(ans);
+        System.out.println(ans);
     }
 
     // leetcode submit region begin(Prohibit modification and deletion)

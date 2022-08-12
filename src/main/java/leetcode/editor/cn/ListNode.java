@@ -16,17 +16,16 @@ public class ListNode {
         this.next = next;
     }
 
-    public static void printListNode(ListNode head) {
-        if (head == null) {
-            System.out.println("[]");
-            return;
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[ ").append(val);
+        ListNode tmp = next;
+        while (tmp != null) {
+            sb.append(" -> ").append(tmp.val);
+            tmp = tmp.next;
         }
-        System.out.print("[ " + head.val);
-        head = head.next;
-        while (head != null) {
-            System.out.print(" -> " + head.val);
-            head = head.next;
-        }
-        System.out.println(" ]");
+        sb.append(" ]");
+        return sb.toString();
     }
 }
